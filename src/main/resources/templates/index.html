@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Housing Cooperative List</title>
+    <link rel="stylesheet" href="regStyle.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+<body class="bckgd">
+<div class="mainPart">
+
+    <div class="list-group navDiv">
+        <a href="/main" class="list-group-item list-group-item-action active">STRONA GŁÓWNA</a>
+        <a href="/allInvests" class="list-group-item list-group-item-action">LISTA INWESTZCJI</a>
+        <a href="/allOffers" class="list-group-item list-group-item-action">LISTA OFERT</a>
+    </div>
+
+    <div class="articleDiv">
+
+
+        <div class="table_part">
+            <table class="tb all_table">
+                <tr class="tb">
+                    <th class="tb" scope="col" align="center">ID</th>
+                    <th class="tb" scope="col" align="center">Nazwa</th>
+                    <th class="tb" scope="col" align="center">Logo</th>
+                </tr>
+                <tr class="tb" th:each="dev : ${developers}">
+                    <td class="tb" th:text="${dev.getId()}"></td>
+                    <td class="tb"><a th:href="'/developerDetails?id=' + ${dev.getId()}" th:text="${dev.getName()}"></a></td>
+                    <td class="tb"><img class="logo_dev" th:src="${dev.getLogoURL()}" width="50px" height="50px"></td>
+                </tr>
+            </table>
+        </div>
+        <br/>
+        <br/>
+        <div class="table_part">
+            <table class="tb all_table">
+                <h2>Oferta specjalna!!!</h2>
+                <tr class="tb">
+                    <th class="tb" scope="col" align="center">ID</th>
+                    <th class="tb" scope="col" align="center">Opis</th>
+                    <th class="tb" scope="col" align="center">Piętro</th>
+                    <th class="tb" scope="col" align="center">Liczba pokoi</th>
+                    <th class="tb" scope="col" align="center">Powierzchnia</th>
+                    <th class="tb" scope="col" align="center">Rzut</th>
+                    <th class="tb" scope="col" align="center">Cena</th>
+                    <th class="tb" scope="col" align="center">Nazwa investycji</th>
+                    <th class="tb" scope="col" align="center">Miasto</th>
+                    <th class="tb" scope="col"></th>
+                </tr>
+                <tr class="tb" th:each="prom : ${promotedOffer}">
+                    <td class="tb" th:text="${prom.getId()}"></td>
+                    <td class="tb" th:text="${prom.getDescription()}"></td>
+                    <td class="tb" th:text="${prom.getFloorNo()}"></td>
+                    <td class="tb" th:text="${prom.getRoomsNo()}"></td>
+                    <td class="tb" th:text="${prom.getArea()}"></td>
+                    <td class="tb"><a th:href="${prom.getLayoutURL()}">Rzut</a></td>
+                    <td class="tb"th:text="${prom.getPrice()}"></td>
+                    <td class="tb"><a th:href="'/investmentDetails?id=' + ${prom.getInvestment().getId()}"
+                                      th:text="${prom.getInvestment().getName()}"></a></td>
+                    <td class="tb"th:text="${prom.getInvestment().getCity()}"></td>
+                    <td class="tb" th:href="'/offerDetails?id=' + ${prom.getId()}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
